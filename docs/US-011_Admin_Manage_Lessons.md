@@ -9,5 +9,3 @@ Với tư cách là Quản trị viên, tôi muốn Thêm, Sửa, Xóa bài họ
 3. Hỗ trợ sắp xếp thứ tự hiển thị của các bài học thông qua trường order (Số thứ tự bài).
 4. Các trường bắt buộc không được để trống (Data Validation).
 
-**Priority:** High
-**Effort Estimate:** Moderate
