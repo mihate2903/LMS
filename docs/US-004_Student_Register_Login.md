@@ -9,5 +9,3 @@ Với tư cách là Học viên, tôi muốn Đăng ký và Đăng nhập vào h
 3. Sau khi đăng nhập thành công, điều hướng người dùng về Trang chủ hoặc trang Khu vực Học tập.
 4. Form nhập liệu phải tối ưu cho Mobile (bàn phím nhập email xuất hiện đúng chuẩn).
 
-**Priority:** High
-**Effort Estimate:** Moderate
