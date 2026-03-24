@@ -8,5 +8,4 @@ Với tư cách là Quản trị viên, tôi muốn đăng nhập trang quản t
 2. Nếu tài khoản đăng nhập có role không phải là Admin, hệ thống phải chặn truy cập và hiển thị thông báo lỗi (HTTP 403).
 3. Dashboard chỉ hiển thị sau khi xác thực thành công token hợp lệ trong Request Header.
 
-**Priority:** High
-**Effort Estimate:** Moderate
+
