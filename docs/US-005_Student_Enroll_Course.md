@@ -11,5 +11,3 @@ Với tư cách là Học viên, tôi muốn điền form thông tin cá nhân, 
 5. Giao diện phải hiển thị thông báo thành công (ví dụ: Pop-up hoặc Toast message) hướng dẫn học viên chờ Admin duyệt.
 6. Form nhập liệu phải hiển thị tốt, không bị tràn viền hoặc cuộn ngang trên các thiết bị di động (Mobile Responsive).
 
-**Priority:** High
-**Effort Estimate:** Moderate
