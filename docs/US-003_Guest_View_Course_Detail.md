@@ -9,5 +9,3 @@ Với tư cách là Khách vãng lai, tôi muốn xem thông tin chi tiết củ
 3. Khách vãng lai chỉ được xem tiêu đề bài học, không được phép truy cập vào nội dung Video hoặc Text.
 4. Nút "Đăng ký khóa học" phải nổi bật và điều hướng người dùng tới trang Checkout hoặc form đăng ký.
 
-**Priority:** High
-**Effort Estimate:** Low
