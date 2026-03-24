@@ -9,5 +9,4 @@ Với tư cách là Khách vãng lai, tôi muốn xem danh sách toàn bộ khó
 3. Giao diện lưới (Grid) hiển thị khóa học phải Responsive, chuyển từ nhiều cột trên PC sang 1 cột trên Mobile[cite: 62].
 4. Các nút bấm và thanh cuộn (nếu có) phải đủ lớn để dễ thao tác trên màn hình cảm ứng[cite: 62].
 
-**Priority:** High
-**Effort Estimate:** Moderate
+
