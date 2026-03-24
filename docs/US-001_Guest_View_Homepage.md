@@ -9,5 +9,3 @@ Với tư cách là Khách vãng lai, tôi muốn xem Trang chủ để thấy B
 3. Hiển thị danh sách các Khóa học nổi bật hoặc Mới nhất, bao gồm ảnh đại diện, tên khóa học và giá tiền.
 4. Hình ảnh và chữ phải tự động co giãn không bị vỡ hoặc tràn viền ngang.
 
-**Priority:** High
-**Effort Estimate:** Low
