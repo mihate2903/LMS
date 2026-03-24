@@ -8,5 +8,3 @@ Với tư cách là Quản trị viên, tôi muốn Thêm, Sửa, Xóa danh mụ
 2. Dữ liệu thay đổi phải được lưu trữ chính xác vào bảng Categories.
 3. Các API quản lý danh mục phải được bảo mật và yêu cầu JWT Token của Admin.
 
-**Priority:** Medium
-**Effort Estimate:** Low
