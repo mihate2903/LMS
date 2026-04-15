@@ -6,7 +6,7 @@ import com.lms.backend.dto.CourseResponse;
 import java.util.List;
 
 public interface CourseService {
-    List<CourseResponse> getAllCourses();
+    List<CourseResponse> getAllCourses(Long categoryId);
     CourseResponse createCourse(CourseRequest request);
     CourseResponse updateCourse(Long id, CourseRequest request);
     CourseResponse getCourseById(Long id);

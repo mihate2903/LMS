@@ -4,6 +4,7 @@ import com.lms.backend.entity.Enrollment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.data.domain.Sort;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,4 +12,7 @@ import java.util.Optional;
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
     List<Enrollment> findByUserId(Long userId);
     Optional<Enrollment> findByUserIdAndCourseId(Long userId, Long courseId);
+    
+    List<Enrollment> findAll(Sort sort);
+    List<Enrollment> findByStatus(String status, Sort sort);
 }

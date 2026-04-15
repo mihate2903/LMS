@@ -2,6 +2,7 @@ package com.lms.backend.service;
 
 import com.lms.backend.dto.CourseRequest;
 import com.lms.backend.dto.CourseResponse;
+import com.lms.backend.dto.LessonResponse;
 import com.lms.backend.entity.Category;
 import com.lms.backend.entity.Course;
 import com.lms.backend.repository.CategoryRepository;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +24,14 @@ public class CourseServiceImpl implements CourseService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public List<CourseResponse> getAllCourses() {
-        return courseRepository.findAll().stream()
+    public List<CourseResponse> getAllCourses(Long categoryId) {
+        List<Course> courses;
+        if (categoryId != null) {
+            courses = courseRepository.findByCategoryId(categoryId);
+        } else {
+            courses = courseRepository.findAll();
+        }
+        return courses.stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
@@ -85,6 +93,22 @@ public class CourseServiceImpl implements CourseService {
     }
 
     private CourseResponse mapToResponse(Course course) {
+        List<LessonResponse> lessonResponses = null;
+        if (course.getLessons() != null) {
+            lessonResponses = course.getLessons().stream()
+                    .map(lesson -> LessonResponse.builder()
+                            .id(lesson.getId())
+                            .courseId(lesson.getCourse() != null ? lesson.getCourse().getId() : null)
+                            .title(lesson.getTitle())
+                            .videoUrl(lesson.getVideoUrl())
+                            .content(lesson.getContent())
+                            .lessonOrder(lesson.getLessonOrder())
+                            .deletedAt(lesson.getDeletedAt())
+                            .build())
+                    .sorted(Comparator.comparing(LessonResponse::getLessonOrder, Comparator.nullsLast(Comparator.naturalOrder())))
+                    .collect(Collectors.toList());
+        }
+
         return CourseResponse.builder()
                 .id(course.getId())
                 .categoryId(course.getCategory() != null ? course.getCategory().getId() : null)
@@ -94,6 +118,7 @@ public class CourseServiceImpl implements CourseService {
                 .description(course.getDescription())
                 .thumbnailUrl(course.getThumbnailUrl())
                 .deletedAt(course.getDeletedAt())
+                .lessons(lessonResponses)
                 .build();
     }
 }

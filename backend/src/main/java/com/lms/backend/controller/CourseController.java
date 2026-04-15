@@ -20,8 +20,8 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping
-    public ResponseEntity<List<CourseResponse>> getAllCourses() {
-        return ResponseEntity.ok(courseService.getAllCourses());
+    public ResponseEntity<List<CourseResponse>> getAllCourses(@RequestParam(required = false) Long categoryId) {
+        return ResponseEntity.ok(courseService.getAllCourses(categoryId));
     }
 
     @GetMapping("/{id}")
@@ -30,19 +30,20 @@ public class CourseController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('admin')")
+    @PreAuthorize("hasAuthority('ROLE_admin')")
     public ResponseEntity<CourseResponse> createCourse(@Valid @RequestBody CourseRequest courseRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(courseService.createCourse(courseRequest));
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('admin')")
-    public ResponseEntity<CourseResponse> updateCourse(@PathVariable Long id, @Valid @RequestBody CourseRequest courseRequest) {
+    @PreAuthorize("hasAuthority('ROLE_admin')")
+    public ResponseEntity<CourseResponse> updateCourse(@PathVariable Long id,
+            @Valid @RequestBody CourseRequest courseRequest) {
         return ResponseEntity.ok(courseService.updateCourse(id, courseRequest));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('admin')")
+    @PreAuthorize("hasAuthority('ROLE_admin')")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return ResponseEntity.noContent().build();

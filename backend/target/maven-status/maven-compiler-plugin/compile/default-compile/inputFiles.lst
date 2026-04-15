@@ -1,23 +1,49 @@
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\dto\AuthResponse.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\security\CustomUserDetailsService.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\dto\LoginRequest.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\entity\Course.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\security\CustomUserDetails.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\repository\EnrollmentRepository.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\config\SecurityConfig.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\entity\Lesson.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\BackendApplication.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\entity\Token.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\repository\TokenRepository.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\security\JwtUtils.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\service\AuthService.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\repository\CategoryRepository.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\dto\RegisterRequest.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\entity\User.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\entity\Enrollment.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\security\JwtAuthFilter.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\repository\LessonRepository.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\repository\CourseRepository.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\controller\AuthController.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\entity\Category.java
-C:\Users\Linh Ha\Desktop\Mini LMS Project\backend\src\main\java\com\lms\backend\repository\UserRepository.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\LoginRequest.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\CourseRequest.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\security\JwtUtils.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\EnrollmentRequest.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\security\CustomUserDetails.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\repository\EnrollmentRepository.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\CourseServiceImpl.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\CategoryResponse.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\repository\UserRepository.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\CategoryService.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\CategoryServiceImpl.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\CourseResponse.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\security\JwtAuthFilter.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\repository\LessonRepository.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\repository\TokenRepository.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\EnrollmentResponse.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\LessonResponse.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\repository\CourseRepository.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\AuthService.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\entity\Token.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\EnrollmentService.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\EnrollmentStatusUpdateRequest.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\exception\GlobalExceptionHandler.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\config\SwaggerConfig.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\LessonRequest.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\entity\User.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\entity\Category.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\controller\EnrollmentController.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\controller\AdminEnrollmentController.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\entity\Course.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\config\CorsConfig.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\RegisterRequest.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\LessonServiceImpl.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\config\SecurityConfig.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\CategoryRequest.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\BackendApplication.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\AuthResponse.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\security\CustomUserDetailsService.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\CourseService.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\entity\Enrollment.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\dto\EnrollmentAdminResponse.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\EnrollmentServiceImpl.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\repository\CategoryRepository.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\service\LessonService.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\controller\LessonController.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\entity\Lesson.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\controller\AuthController.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\controller\CategoryController.java
+C:\Users\Linh Ha\LMS\backend\src\main\java\com\lms\backend\controller\CourseController.java

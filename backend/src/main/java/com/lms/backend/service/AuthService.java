@@ -81,4 +81,12 @@ public class AuthService {
                 .role(user.getRole())
                 .build();
     }
+
+    public void logout(String jwtToken) {
+        tokenRepository.findByToken(jwtToken).ifPresent(token -> {
+            token.setIsRevoked(true);
+            tokenRepository.save(token);
+        });
+        SecurityContextHolder.clearContext();
+    }
 }

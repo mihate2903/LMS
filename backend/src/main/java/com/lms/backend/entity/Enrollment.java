@@ -28,4 +28,13 @@ public class Enrollment {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "contact_name")
+    private String contactName;
+
+    @Column(name = "contact_phone")
+    private String contactPhone;
+
+    @Column(name = "contact_email")
+    private String contactEmail;
 }
