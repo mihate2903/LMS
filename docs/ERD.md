@@ -1,1 +1,2 @@
-<img width="1510" height="766" alt="image" src="https://github.com/user-attachments/assets/4030cff8-d655-4feb-a4f5-5db1f688ca7d" />
+<img width="8192" height="3667" alt="User Engagement and Course-2026-04-25-083030" src="https://github.com/user-attachments/assets/f544e2da-fce8-46d4-b54b-7f4910927147" />
+
