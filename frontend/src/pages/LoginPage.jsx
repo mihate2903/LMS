@@ -17,9 +17,13 @@ const LoginPage = () => {
     try {
       const response = await api.post('/auth/login', { email, password });
       
-      // Thành công lấy token ra nhét vào két sắt localStorage
-      const token = response.data.token;
+      // Thành công lấy token & role ra nhét vào két sắt localStorage
+      const { token, role, name, avatarUrl } = response.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+      localStorage.setItem('name', name);
+      localStorage.setItem('avatarUrl', avatarUrl || '');
+      window.dispatchEvent(new Event('profileUpdated'));
       
       // Đá thẳng về trang chủ sau khi Đăng nhập thành công
       navigate('/');

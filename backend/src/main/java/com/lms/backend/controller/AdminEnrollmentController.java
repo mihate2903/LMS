@@ -19,9 +19,12 @@ public class AdminEnrollmentController {
     private final EnrollmentService enrollmentService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_admin')")
-    public ResponseEntity<List<EnrollmentAdminResponse>> getAllEnrollments(@RequestParam(required = false) String status) {
-        return ResponseEntity.ok(enrollmentService.getAllEnrollmentsForAdmin(status));
+    @PreAuthorize("hasAuthority('ROLE_admin') or hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<List<EnrollmentAdminResponse>> getAllEnrollments(
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) Long courseId,
+            @RequestParam(required = false) Long userId) {
+        return ResponseEntity.ok(enrollmentService.getAllEnrollmentsForAdmin(status, courseId, userId));
     }
 
     @PutMapping("/{id}/status")

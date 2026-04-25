@@ -28,6 +28,9 @@ public class User {
     private String passwordHash;
     
     private String role;
+    
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Token> tokens;

@@ -25,7 +25,13 @@ const RegisterPage = () => {
     setError(null);
 
     try {
-      await api.post('/auth/register', formData);
+      const response = await api.post('/auth/register', formData);
+      const { token, role, name, avatarUrl } = response.data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+      localStorage.setItem('name', name);
+      localStorage.setItem('avatarUrl', avatarUrl || '');
+      window.dispatchEvent(new Event('profileUpdated'));
       setSuccess(true);
       // Chờ 2s rồi tự động bốc sang trang Đăng nhập
       setTimeout(() => {

@@ -1,0 +1,31 @@
+# Java/Maven
+backend/target/
+backend/*.log
+backend/.idea/
+backend/*.iml
+backend/bin/
+
+# Node/React
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# IDE/System
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Project Specific
+backend/uploads/*
+!backend/uploads/.gitkeep

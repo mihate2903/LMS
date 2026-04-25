@@ -24,13 +24,21 @@ public class CourseServiceImpl implements CourseService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public List<CourseResponse> getAllCourses(Long categoryId) {
+    public List<CourseResponse> getAllCourses(Long categoryId, String keyword) {
         List<Course> courses;
-        if (categoryId != null) {
+        boolean hasCategory = categoryId != null;
+        boolean hasKeyword = keyword != null && !keyword.trim().isEmpty();
+
+        if (hasCategory && hasKeyword) {
+            courses = courseRepository.findByCategoryIdAndTitleContainingIgnoreCase(categoryId, keyword);
+        } else if (hasCategory) {
             courses = courseRepository.findByCategoryId(categoryId);
+        } else if (hasKeyword) {
+            courses = courseRepository.findByTitleContainingIgnoreCase(keyword);
         } else {
             courses = courseRepository.findAll();
         }
+
         return courses.stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -100,8 +108,10 @@ public class CourseServiceImpl implements CourseService {
                             .id(lesson.getId())
                             .courseId(lesson.getCourse() != null ? lesson.getCourse().getId() : null)
                             .title(lesson.getTitle())
-                            .videoUrl(lesson.getVideoUrl())
-                            .content(lesson.getContent())
+                            // videoUrl & content bị che giấu cố ý để bảo vệ nội dung:
+                            // Frontend chỉ dùng API này để vẽ Sidebar mục lục, không được lấy Video trực tiếp!
+                            .videoUrl(null)
+                            .content(null)
                             .lessonOrder(lesson.getLessonOrder())
                             .deletedAt(lesson.getDeletedAt())
                             .build())

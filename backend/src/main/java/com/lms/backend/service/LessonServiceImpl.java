@@ -3,15 +3,21 @@ package com.lms.backend.service;
 import com.lms.backend.dto.LessonRequest;
 import com.lms.backend.dto.LessonResponse;
 import com.lms.backend.entity.Course;
+import com.lms.backend.entity.Enrollment;
 import com.lms.backend.entity.Lesson;
 import com.lms.backend.repository.CourseRepository;
+import com.lms.backend.repository.EnrollmentRepository;
 import com.lms.backend.repository.LessonRepository;
+import com.lms.backend.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +26,7 @@ public class LessonServiceImpl implements LessonService {
 
     private final LessonRepository lessonRepository;
     private final CourseRepository courseRepository;
+    private final EnrollmentRepository enrollmentRepository;
 
     @Override
     public List<LessonResponse> getAllLessons() {
@@ -32,6 +39,31 @@ public class LessonServiceImpl implements LessonService {
     public LessonResponse getLessonById(Long id) {
         Lesson lesson = lessonRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lesson not found"));
+
+        // --- Lính Gác Bảo Mật: Kiểm tra quyền truy cập Video ---
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()
+                || authentication.getPrincipal().equals("anonymousUser")) {
+            // Chưa đăng nhập -> Chặn!
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Bạn cần đăng nhập để xem bài học này!");
+        }
+
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        Long courseId = lesson.getCourse().getId();
+
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equalsIgnoreCase("ROLE_admin"));
+
+        if (!isAdmin) {
+            // Kiểm tra Enrollment: Phải mua VÀ được Admin duyệt mới cho xem!
+            Optional<Enrollment> enrollment = enrollmentRepository.findByUserIdAndCourseId(userId, courseId);
+            if (enrollment.isEmpty() || !"approved".equalsIgnoreCase(enrollment.get().getStatus())) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                        "Khóa học chưa được phê duyệt hoặc bạn chưa đăng ký. Vui lòng kiểm tra lại!");
+            }
+        }
+
         return mapToResponse(lesson);
     }
 

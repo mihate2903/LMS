@@ -27,6 +27,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     private final EnrollmentRepository enrollmentRepository;
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
+    private final NotificationService notificationService;
 
     @Override
     public EnrollmentResponse enrollCourse(EnrollmentRequest request, Long userId) {
@@ -50,7 +51,29 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 .contactEmail(user.getEmail())
                 .build();
 
-        return mapToResponse(enrollmentRepository.save(enrollment));
+        Enrollment savedEnrollment = enrollmentRepository.save(enrollment);
+
+        // Notify user about pending enrollment
+        notificationService.createNotification(
+            user,
+            "ENROLLMENT_PENDING",
+            "Đơn đăng ký khóa học '" + course.getTitle() + "' của bạn đang chờ phê duyệt.",
+            "/profile"
+        );
+
+        // Notify all Admins about new enrollment request
+        List<User> admins = userRepository.findAllByRole("ADMIN");
+        admins.addAll(userRepository.findAllByRole("ROLE_ADMIN"));
+        for (User admin : admins) {
+            notificationService.createNotification(
+                admin,
+                "ADMIN_NEW_ENROLLMENT",
+                "Có yêu cầu đăng ký mới cho khóa học '" + course.getTitle() + "' từ " + user.getName(),
+                "/admin"
+            );
+        }
+
+        return mapToResponse(savedEnrollment);
     }
 
     @Override
@@ -61,11 +84,24 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public List<EnrollmentAdminResponse> getAllEnrollmentsForAdmin(String status) {
+    public List<EnrollmentAdminResponse> getAllEnrollmentsForAdmin(String status, Long courseId, Long userId) {
         Sort sortByDate = Sort.by(Sort.Direction.DESC, "createdAt");
         List<Enrollment> enrollments;
         
-        if (status != null && !status.trim().isEmpty()) {
+        boolean hasStatus = status != null && !status.trim().isEmpty();
+        boolean hasCourseId = courseId != null;
+        boolean hasUserId = userId != null;
+
+        // Since this is a simple query builder without Specification, 
+        // we handle the common combinations or fall back to code-level filtering.
+        // For simplicity, we prioritize filters.
+        if (hasUserId) {
+            if (hasStatus) enrollments = enrollmentRepository.findByStatusAndUserId(status, userId, sortByDate);
+            else enrollments = enrollmentRepository.findByUserId(userId, sortByDate);
+        } else if (hasCourseId) {
+            if (hasStatus) enrollments = enrollmentRepository.findByStatusAndCourseId(status, courseId, sortByDate);
+            else enrollments = enrollmentRepository.findByCourseId(courseId, sortByDate);
+        } else if (hasStatus) {
             enrollments = enrollmentRepository.findByStatus(status, sortByDate);
         } else {
             enrollments = enrollmentRepository.findAll(sortByDate);
@@ -81,6 +117,17 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         
         enrollment.setStatus(request.getStatus());
         enrollmentRepository.save(enrollment);
+
+        // Notify user about status change
+        String statusMsg = request.getStatus().equalsIgnoreCase("approved") ? "đã được duyệt" : "đã bị từ chối";
+        String type = request.getStatus().equalsIgnoreCase("approved") ? "ENROLLMENT_APPROVED" : "ENROLLMENT_REJECTED";
+        
+        notificationService.createNotification(
+            enrollment.getUser(),
+            type,
+            "Đơn đăng ký khóa học '" + enrollment.getCourse().getTitle() + "' của bạn " + statusMsg + ".",
+            request.getStatus().equalsIgnoreCase("approved") ? "/study/" + enrollment.getCourse().getId() : "/profile"
+        );
     }
 
     private EnrollmentResponse mapToResponse(Enrollment enrollment) {
@@ -97,9 +144,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 .id(enrollment.getId())
                 .status(enrollment.getStatus())
                 .createdAt(enrollment.getCreatedAt())
-                .contactName(enrollment.getContactName())
-                .contactPhone(enrollment.getContactPhone())
-                .contactEmail(enrollment.getContactEmail())
+                .contactName(enrollment.getUser() != null ? enrollment.getUser().getName() : enrollment.getContactName())
+                .contactPhone(enrollment.getUser() != null ? enrollment.getUser().getPhone() : enrollment.getContactPhone())
+                .contactEmail(enrollment.getUser() != null ? enrollment.getUser().getEmail() : enrollment.getContactEmail())
                 .course(courseSummary)
                 .build();
     }
@@ -118,9 +165,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 .enrollmentId(enrollment.getId())
                 .status(enrollment.getStatus())
                 .createdAt(enrollment.getCreatedAt())
-                .contactName(enrollment.getContactName())
-                .contactPhone(enrollment.getContactPhone())
-                .contactEmail(enrollment.getContactEmail())
+                .contactName(enrollment.getUser() != null ? enrollment.getUser().getName() : enrollment.getContactName())
+                .contactPhone(enrollment.getUser() != null ? enrollment.getUser().getPhone() : enrollment.getContactPhone())
+                .contactEmail(enrollment.getUser() != null ? enrollment.getUser().getEmail() : enrollment.getContactEmail())
                 .course(courseDto)
                 .build();
     }

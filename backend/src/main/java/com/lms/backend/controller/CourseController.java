@@ -20,8 +20,10 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping
-    public ResponseEntity<List<CourseResponse>> getAllCourses(@RequestParam(required = false) Long categoryId) {
-        return ResponseEntity.ok(courseService.getAllCourses(categoryId));
+    public ResponseEntity<List<CourseResponse>> getAllCourses(
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) String keyword) {
+        return ResponseEntity.ok(courseService.getAllCourses(categoryId, keyword));
     }
 
     @GetMapping("/{id}")

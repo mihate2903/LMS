@@ -30,4 +30,13 @@ public class GlobalExceptionHandler {
         error.put("error", ex.getReason());
         return ResponseEntity.status(ex.getStatusCode()).body(error);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, String>> handleAllExceptions(Exception ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        error.put("type", ex.getClass().getSimpleName());
+        ex.printStackTrace(); // In ra console để theo dõi
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
 }
